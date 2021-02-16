@@ -1,0 +1,24 @@
+import React,{useContext} from "react";
+
+const List = ({ items, setSelectedItem, selected }) => {
+    console.log("THESE ARE THE ITEMS: ", items)
+
+    React.useEffect(()=> {
+        console.log("items Changed in list");
+    },[items]);
+    return(
+        <nav className="list">
+            <ul>
+                {
+                    items.map((item, idx) =>
+                        <li key={idx} className={selected == item.id ? "selected" : ""}>
+                            <a href="#" onClick={() => setSelectedItem(item.id)}>{item.name}</a>
+                        </li>
+                    )
+                }
+            </ul>
+        </nav>
+    )
+};
+
+export default List;

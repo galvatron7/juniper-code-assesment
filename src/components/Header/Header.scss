@@ -1,0 +1,47 @@
+/** header area */
+.header {
+  grid-area: header;
+  background-color: #000000;
+  border-radius-topleft: 3px;
+  border-radius-topright: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .logo {
+    margin-left: 15px;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: orange;
+    border-radius: 3px;
+    a {
+      margin-left: 5px;
+      text-decoration: none;
+      color: white;
+    }
+    svg {
+      color:orange;
+    }
+  }
+  .nav {
+    display: inline-block;
+    list-style: none;
+    li {
+      display: inline-block;
+      padding: 0 1.4em 0 0;
+      font-size: 0.9em;
+      a {
+        text-decoration: none;
+        color: white;
+        background-color: transparent;
+      }
+      a.active {
+        color: red;
+        border-bottom: 2px solid red;
+        font-weight: 300;
+      }
+      a:hover {
+        color: red;
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+/** content area */
+.form-container {
+  border-left:solid 1px #70757a;
+  grid-area: form-container;
+  padding:50px;
+  color:#70757a;
+
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .chk-ctr input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  #field3 {
+    margin-left:0;
+  }
+
+  .cluster {
+    margin:10px 0px;
+  }
+
+  /* Style the checkmark/indicator */
+  .chk-ctr .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}

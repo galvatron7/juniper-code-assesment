@@ -1,0 +1,44 @@
+/** side area */
+.list {
+  grid-area: list;
+  box-sizing: border-box;
+
+  ul{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    li {
+      padding: 10px 1.4em 10px 20px;
+      font-size: 0.9em;
+      list-style: none;
+      box-sizing: border-box;
+      border-bottom:1px solid #70757a;
+      position:relative;
+      a {
+        text-decoration: none;
+        color: #70757a;
+        background-color: transparent;
+      }
+      a.active {
+        color: red;
+        border-bottom: 2px solid red;
+        font-weight: 300;
+      }
+      a:hover {
+        color: red;
+      }
+      &.selected {
+        & ::before {
+          content:'';
+          width: 5px;
+          height:100%;
+          background-color: orange;
+          display:inline-block;
+          position:absolute;
+          left:0;
+          top:0;
+        }
+      }
+    }
+  }
+}
