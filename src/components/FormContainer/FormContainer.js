@@ -51,22 +51,24 @@ const FormContainer = React.memo(({fields, name, selected, items, saveItem, setT
 
     return(
         <div className="form-container">
-            <h2>{name}</h2>
-            <div>
-            {
-                currFields.map((field, idx) => {
-                  switch(field.fieldType) {
-                    case CONSTANTS.TEXT:
-                        return( <TextField key={idx} field={field} onBlur={onFieldAction}/> );
-                    case CONSTANTS.OPTION:
-                        return( <OptionField key={idx} field={field} onChange={onFieldAction}/> );
-                    case CONSTANTS.TOGGLE:
-                        return( <ToggleField key={idx} field={field} onChange={onFieldAction}/> );
+            <form>
+                <h2>{name}</h2>
+                <div>
+                {
+                    currFields.map((field, idx) => {
+                      switch(field.fieldType) {
+                        case CONSTANTS.TEXT:
+                            return( <TextField key={idx} field={field} onBlur={onFieldAction}/> );
+                        case CONSTANTS.OPTION:
+                            return( <OptionField key={idx} field={field} onChange={onFieldAction}/> );
+                        case CONSTANTS.TOGGLE:
+                            return( <ToggleField key={idx} field={field} onChange={onFieldAction}/> );
+                    }
+                  })
                 }
-              })
-            }
-            <button type="button" onClick={ onFieldsSave }>Save</button>
-            </div>
+                <button type="button" onClick={ onFieldsSave }>Save</button>
+                </div>
+            </form>
         </div>
     )
 });
