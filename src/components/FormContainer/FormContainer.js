@@ -15,11 +15,16 @@ const FormContainer = React.memo(({fields, name, selected, items, saveItem, setT
     },[selected]);
 
     useEffect(() => {
-        console.log("Items Changed!!!");
+        console.log("Items Changed!s!!", items);
+        setFields([...fields]);
     },[items]);
 
     function onFieldAction (id, value) {
         setFieldsToSave({...fieldsToSave, [id]:value});
+    }
+
+    const onFieldsUndo = (e) => {
+        // setFields(updateFields)
     }
 
     const onFieldsSave = (e) => {
@@ -48,6 +53,7 @@ const FormContainer = React.memo(({fields, name, selected, items, saveItem, setT
             console.log("on Save", newItems);
             // save to next
             saveItem(newItems);
+            setFields(updateFields)
         });
     };
 
@@ -68,6 +74,7 @@ const FormContainer = React.memo(({fields, name, selected, items, saveItem, setT
               })
             }
             <button type="button" onClick={ onFieldsSave }>Save</button>
+                <button type="button" onClick={onFieldsUndo}>Undo</button>
             </div>
         </div>
     )
