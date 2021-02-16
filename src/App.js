@@ -22,9 +22,10 @@ class App extends React.Component {
          };
          this.saveItem = this.saveItem.bind(this);
          this.setToPrevious = this.setToPrevious.bind(this);
+         this.undoItem = this.undoItem.bind(this);
      }
 
-     setSelectedItem (value) {
+    setSelectedItem (value) {
         const updatedState = {...this.state, selected:value};
         this.setState(updatedState);
     }
@@ -33,7 +34,7 @@ class App extends React.Component {
         const {past} = this.state;
         this.setState({
             ...this.state,
-            past:[items]
+            past:[...past, items]
         });
     }
 
@@ -53,7 +54,7 @@ class App extends React.Component {
         const newPast = past.slice(0, past.length - 1);
 
         this.setState(prevState => {
-            console.log("previouse: ", prevState);
+            console.log("previous: ", prevState);
             return ({
                 ...this.state,
                 past: newPast,
@@ -76,7 +77,10 @@ class App extends React.Component {
 
         return (
         <div className="app">
-          <Header title={this.state.title}/>
+          <Header
+              title={this.state.title}
+              undoItem={this.undoItem}
+          />
           <List
               items={this.state.items}
               setSelectedItem={this.setSelectedItem}
@@ -86,7 +90,7 @@ class App extends React.Component {
           <FormContainer
                 items={this.state.present}
                 selected={this.state.selected}
-                name={this.state.items[this.state.selected].name}
+                name={this.state.present[this.state.selected].name}
                 fields={ [...this.state.present[this.state.selected].fields]}
                 saveItem={this.saveItem}
                 setToPrevious={this.setToPrevious}

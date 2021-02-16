@@ -28,7 +28,7 @@ class TextField extends React.Component {
                     id={this.props.field.id}
                     name={this.props.field.id}
                     className="form-input"
-                    value={this.state.fieldValue}
+                    value={this.props.fieldValue}
                     onChange={this.handleChange}/>
             </div>
         )
