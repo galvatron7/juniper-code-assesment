@@ -1,11 +1,10 @@
 import React,{useContext} from "react";
 
 const List = ({ items, setSelectedItem, selected }) => {
-    console.log("THESE ARE THE ITEMS: ", items)
 
     React.useEffect(()=> {
-        console.log("items Changed in list");
     },[items]);
+
     return(
         <nav className="list">
             <ul>

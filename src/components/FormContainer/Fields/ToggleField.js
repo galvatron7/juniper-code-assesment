@@ -5,7 +5,7 @@ const ToggleField = ({field, onChange}) => {
 
     useEffect(() => {
         setChecked(field.fieldValue);
-    });
+    },[field.fieldValue]);
 
     function handleChange(e) {
         onChange(field.id, e.target.checked);

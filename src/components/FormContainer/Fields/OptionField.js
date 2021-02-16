@@ -6,7 +6,7 @@ const OptionField = ({field, onChange}) => {
 
     useEffect(() => {
         setSelectedOption(field.fieldValue);
-    });
+    },[field.fieldValue]);
 
     function handleChange(e) {
         onChange(field.id, e.target.value);

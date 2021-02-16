@@ -13,7 +13,7 @@ class App extends React.Component {
      constructor(props) {
          super(props);
          this.state = {
-             title:"Item Editor",
+             title: CONSTANTS.HEADER_TITLE,
              selected:0,
              items:Items,
              past:[],
@@ -21,8 +21,10 @@ class App extends React.Component {
              future:[]
          };
          this.saveItem = this.saveItem.bind(this);
+         this.setSelectedItem = this.setSelectedItem.bind(this);
          this.setToPrevious = this.setToPrevious.bind(this);
          this.undoItem = this.undoItem.bind(this);
+         this.redoItem = this.redoItem.bind(this);
      }
 
     setSelectedItem (value) {
@@ -52,15 +54,26 @@ class App extends React.Component {
         }
         const previous = past[past.length - 1];
         const newPast = past.slice(0, past.length - 1);
+        this.setState({
+            ...this.state,
+            past: newPast,
+            present: previous,
+            future: [present, ...future]
+        });
+    }
 
-        this.setState(prevState => {
-            console.log("previous: ", prevState);
-            return ({
-                ...this.state,
-                past: newPast,
-                present: previous,
-                future: [present, ...future]
-            })
+    redoItem(){
+        const {past, present, future} = this.state;
+        if(future.length <= 0){
+            return;
+        }
+        const next = future[0];
+        const newFuture = future.slice(1);
+        this.setState({
+            ...this.state,
+            past: [...past, present],
+            present: next,
+            future: newFuture
         });
     }
 
@@ -80,6 +93,7 @@ class App extends React.Component {
           <Header
               title={this.state.title}
               undoItem={this.undoItem}
+              redoItem={this.redoItem}
           />
           <List
               items={this.state.items}

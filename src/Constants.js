@@ -16,3 +16,4 @@ export const UNDO_LABEL = "Undo";
 export const REDO_LABEL = "Redo";
 export const SAVE_LABEL = "Save";
 export const CANCEL_LABEL = "Cancel";
+export const HEADER_TITLE = "Item Editor";

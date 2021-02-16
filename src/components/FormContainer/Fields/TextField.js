@@ -4,8 +4,7 @@ const TextField = ({field, onBlur}) => {
     const [text, setText] = useState(field.fieldValue);
 
     useEffect(() => {
-            console.log("TEXT FIELD CHANGED", field.fieldValue);
-            setText(field.fieldValue);
+        setText(field.fieldValue);
     },[field.fieldValue]);
 
     function handleChange(e) {
