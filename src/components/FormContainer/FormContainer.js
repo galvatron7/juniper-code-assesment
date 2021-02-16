@@ -4,7 +4,7 @@ import TextField from "./Fields/TextField";
 import OptionField from "./Fields/OptionField";
 import * as CONSTANTS from "../../Constants";
 
-const FormContainer = React.memo(({fields, name, selected, items, saveItem, setToPrevious}) =>  {
+const FormContainer = ({fields, name, selected, items, saveItem, setToPrevious}) =>  {
 
     const [currFields, setFields] = React.useState([]);
     const [fieldsToSave, setFieldsToSave] = React.useState({});
@@ -71,6 +71,6 @@ const FormContainer = React.memo(({fields, name, selected, items, saveItem, setT
             </form>
         </div>
     )
-});
+};
 
 export default FormContainer;
