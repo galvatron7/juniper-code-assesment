@@ -4,22 +4,10 @@ import TextField from "./Fields/TextField";
 import OptionField from "./Fields/OptionField";
 import * as CONSTANTS from "../../Constants";
 
-// // Hook
-// function usePrevious(value, callback) {
-//     const prevValues = useRef(value);
-//     useEffect(() => {
-//         callback(prevValues.current);
-//         return () => (prevValues.current = value);
-//     }, [value, callback]); // Only re-run if value changes
-// }
-
-
-const FormContainer = React.memo(({fields, name, selected, items, saveItem}) =>  {
+const FormContainer = React.memo(({fields, name, selected, items, saveItem, setToPrevious}) =>  {
 
     const [currFields, setFields] = React.useState([]);
-
-    const prevValues = useRef();
-
+    const [fieldsToSave, setFieldsToSave] = React.useState({});
 
     useEffect(() => {
         console.log("called!!");
@@ -27,31 +15,46 @@ const FormContainer = React.memo(({fields, name, selected, items, saveItem}) => 
     },[selected]);
 
     useEffect(() => {
-        console.log("ljljlkjlkjlkjl");
+        console.log("Items Changed!!!");
     },[items]);
 
     function onFieldAction (id, value) {
-        const updateFields = fields.reduce((accum, field) => {
-            if(field.id == id){
-                field.fieldValue = value;
-                accum.push({...field, fieldValue:value})
-            } else {
-                accum.push(field);
-            }
-            return accum;
-         },[]);
-        // updateFields[currField].fieldValue = value;
-        setFields(updateFields);
+        setFieldsToSave({...fieldsToSave, [id]:value});
     }
 
     const onFieldsSave = (e) => {
-        saveItem(items);
+        new Promise((resolve, reject) => {
+            console.log("on Preserve", items);
+            // preserve current
+            setToPrevious(items);
+            resolve();
+        }).then(() => {
+            const updateFields = fields.reduce((accum, field) => {
+                if(fieldsToSave[field.id]){
+                    accum.push({...field, fieldValue: fieldsToSave[field.id]})
+                } else {
+                    accum.push(field);
+                }
+                return accum;
+            },[]);
+            let newItems = items.reduce((accum, item) => {
+                if(item.id === selected){
+                    accum.push({...item, fields:updateFields});
+                } else {
+                    accum.push(item)
+                }
+                return accum;
+            },[]);
+            console.log("on Save", newItems);
+            // save to next
+            saveItem(newItems);
+        });
     };
 
     return(
         <div className="form-container">
             <h2>{name}</h2>
-            <form>
+            <div>
             {
                 currFields.map((field, idx) => {
                   switch(field.fieldType) {
@@ -65,7 +68,7 @@ const FormContainer = React.memo(({fields, name, selected, items, saveItem}) => 
               })
             }
             <button type="button" onClick={ onFieldsSave }>Save</button>
-            </form>
+            </div>
         </div>
     )
 });

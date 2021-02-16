@@ -10,7 +10,6 @@ import * as CONSTANTS from "./Constants";
 
 class App extends React.Component {
 
-
      constructor(props) {
          super(props);
          this.state = {
@@ -22,6 +21,7 @@ class App extends React.Component {
              future:[]
          };
          this.saveItem = this.saveItem.bind(this);
+         this.setToPrevious = this.setToPrevious.bind(this);
      }
 
      setSelectedItem (value) {
@@ -29,20 +29,18 @@ class App extends React.Component {
         this.setState(updatedState);
     }
 
-    saveItem(items) {
-        const {past, present, future} = this.state;
-        console.log("saving item!!!!: ", items);
-        console.log("Past: ", past);
-        console.log("Present: ", present);
-        past.push(present);
-        this.setState(prevState => {
-            console.log("previouse: ", prevState);
-            return ({
-                ...this.state,
-                past: [...past],
-                present: present
+    setToPrevious(items){
+        const {past} = this.state;
+        this.setState({
+            ...this.state,
+            past:[items]
+        });
+    }
 
-            })
+    saveItem(items) {
+        this.setState( {
+            ...this.state,
+            present: items
         });
     }
 
@@ -72,7 +70,8 @@ class App extends React.Component {
             selected:this.state.selected,
             name:this.state.items[this.state.selected].name,
             fields: [...this.state.items[this.state.selected].fields],
-            saveItem:this.saveItem
+            saveItem:this.saveItem,
+            setToPrevious:this.setToPrevious
         };
 
         return (
@@ -84,7 +83,14 @@ class App extends React.Component {
               selected={this.state.selected}
           >
           </List>
-          <FormContainer {...formProps}/>
+          <FormContainer
+                items={this.state.present}
+                selected={this.state.selected}
+                name={this.state.items[this.state.selected].name}
+                fields={ [...this.state.present[this.state.selected].fields]}
+                saveItem={this.saveItem}
+                setToPrevious={this.setToPrevious}
+          />
         </div>
       );
     }
