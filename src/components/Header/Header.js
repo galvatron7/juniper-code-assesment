@@ -2,7 +2,7 @@ import React from "react";
 import * as CONSTANTS from "../../Constants";
 
 const Header = (props) => {
-    const {saveItem, undoItem, redoItem, cancelItem, title, selected, items} = props;
+    const {undoItem, redoItem, cancelItem, title, selected, items, onSave} = props;
     const onUndo = () => {
         undoItem(selected);
     };
@@ -34,6 +34,9 @@ const Header = (props) => {
     const menu = [{
             label:CONSTANTS.UNDO_LABEL,
             action: () => {undoItem(selected)}
+        }, {
+            label:CONSTANTS.SAVE_LABEL,
+            action: () => {onSave()}
         }, {
             label:CONSTANTS.REDO_LABEL,
             action: () => {redoItem(selected)}

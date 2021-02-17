@@ -26,6 +26,7 @@ class App extends React.Component {
          this.undoItem = this.undoItem.bind(this);
          this.redoItem = this.redoItem.bind(this);
          this.cancelItem = this.cancelItem.bind(this);
+         this.onSave = this.onSave.bind(this);
      }
 
     setSelectedItem (value) {
@@ -84,7 +85,11 @@ class App extends React.Component {
             ...this.state,
             present: updatedItems
         });
-        this.formRef.current.handleCancel()
+        this.formRef.current.handleCancel();
+    }
+
+    onSave(){
+         this.formRef.current.handleSave();
     }
 
     render(){
@@ -96,6 +101,7 @@ class App extends React.Component {
                   undoItem={this.undoItem}
                   redoItem={this.redoItem}
                   cancelItem={this.cancelItem}
+                  onSave={this.onSave}
               />
               <List
                   items={this.state.items}
@@ -111,6 +117,7 @@ class App extends React.Component {
                     fields={ [...this.state.present[this.state.selected].fields]}
                     saveItem={this.saveItem}
                     setToPrevious={this.setToPrevious}
+                    historyCount={this.state.past.length}
               />
             </div>
         );

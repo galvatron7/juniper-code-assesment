@@ -4,6 +4,25 @@
   grid-area: form-container;
   padding:50px;
   color:$grey-dark;
+  position:relative;
+
+  .change-counter {
+    position:relative;
+    bottom: 20px;
+    left: 34.13em;
+    background-color: $tru-red;
+    height:40px;
+    padding:10px;
+    box-sizing: border-box;
+    border-radius:3px;
+    color: white;
+    font-size:20px;
+    max-width:200px;
+
+    &.hidden {
+      visibility: hidden;
+    }
+  }
 
   form {
     padding:20px;
@@ -20,6 +39,11 @@
         text-decoration: none;
         color: white;
       }
+    }
+
+    .form-checkbox {
+      margin-left:0;
+      margin-right:8px;
     }
   }
 
