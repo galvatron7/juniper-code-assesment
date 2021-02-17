@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef} from "react";
+import React, {useContext, useEffect} from "react";
 import ToggleField from "./Fields/ToggleField";
 import TextField from "./Fields/TextField";
 import OptionField from "./Fields/OptionField";
