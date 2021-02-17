@@ -104,7 +104,12 @@ const FormContainer = forwardRef(({fields, name, selected, items, saveItem, setT
                 </div>
             </form>
             <div className={`change-counter ${show ? "" : "hidden"}`}>
-                <span>{count} Items in History</span>
+                <span>
+                    {count }&nbsp;
+                    {(count == 0 || count > 1)?
+                    CONSTANTS.COUNT_HISTORY_PLURL :
+                    CONSTANTS.COUNT_HISTORY_SINGLE }
+                </span>
             </div>
         </div>
     )

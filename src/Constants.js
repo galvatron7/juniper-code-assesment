@@ -17,3 +17,5 @@ export const REDO_LABEL = "Redo";
 export const SAVE_LABEL = "Save";
 export const CANCEL_LABEL = "Cancel";
 export const HEADER_TITLE = "Item Editor";
+export const COUNT_HISTORY_SINGLE = "Item in History";
+export const COUNT_HISTORY_PLURL = "Items in History";
