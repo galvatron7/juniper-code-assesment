@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React from "react";
 import * as CONSTANTS from "../../Constants";
 
 const Header = (props) => {
@@ -8,11 +8,6 @@ const Header = (props) => {
     };
     const onRedo = () => {
         redoItem(selected);
-    };
-    const onSave = () => {
-       // find item by id
-       // const currItem = items.find((item) => item.id == selected);
-       saveItem(items);
     };
 
     const onCancel = () => {
@@ -42,9 +37,6 @@ const Header = (props) => {
         }, {
             label:CONSTANTS.REDO_LABEL,
             action: () => {redoItem(selected)}
-        }, {
-            label:CONSTANTS.SAVE_LABEL,
-            action: () => {onSave()}
         }, {
             label:CONSTANTS.CANCEL_LABEL,
              action: () => {onCancel()}

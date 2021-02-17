@@ -1,10 +1,9 @@
-import React,{useContext} from "react";
+import React from "react";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import FormContainer from "./components/FormContainer/FormContainer";
 
 import './App.scss';
-import {useState, useEffect} from "react";
 import {Items} from "./data";
 import * as CONSTANTS from "./Constants";
 
@@ -20,11 +19,13 @@ class App extends React.Component {
              present:Items,
              future:[]
          };
+         this.formRef = React.createRef();
          this.saveItem = this.saveItem.bind(this);
          this.setSelectedItem = this.setSelectedItem.bind(this);
          this.setToPrevious = this.setToPrevious.bind(this);
          this.undoItem = this.undoItem.bind(this);
          this.redoItem = this.redoItem.bind(this);
+         this.cancelItem = this.cancelItem.bind(this);
      }
 
     setSelectedItem (value) {
@@ -77,40 +78,42 @@ class App extends React.Component {
         });
     }
 
+    cancelItem(items){
+        const updatedItems = [...items];
+        this.setState( {
+            ...this.state,
+            present: updatedItems
+        });
+        this.formRef.current.handleCancel()
+    }
+
     render(){
-
-        const formProps = {
-            items:this.state.items,
-            selected:this.state.selected,
-            name:this.state.items[this.state.selected].name,
-            fields: [...this.state.items[this.state.selected].fields],
-            saveItem:this.saveItem,
-            setToPrevious:this.setToPrevious
-        };
-
         return (
-        <div className="app">
-          <Header
-              title={this.state.title}
-              undoItem={this.undoItem}
-              redoItem={this.redoItem}
-          />
-          <List
-              items={this.state.items}
-              setSelectedItem={this.setSelectedItem}
-              selected={this.state.selected}
-          >
-          </List>
-          <FormContainer
-                items={this.state.present}
-                selected={this.state.selected}
-                name={this.state.present[this.state.selected].name}
-                fields={ [...this.state.present[this.state.selected].fields]}
-                saveItem={this.saveItem}
-                setToPrevious={this.setToPrevious}
-          />
-        </div>
-      );
+            <div className="app">
+              <Header
+                  items={this.state.present}
+                  title={this.state.title}
+                  undoItem={this.undoItem}
+                  redoItem={this.redoItem}
+                  cancelItem={this.cancelItem}
+              />
+              <List
+                  items={this.state.items}
+                  setSelectedItem={this.setSelectedItem}
+                  selected={this.state.selected}
+              >
+              </List>
+              <FormContainer
+                    ref={this.formRef}
+                    items={this.state.present}
+                    selected={this.state.selected}
+                    name={this.state.present[this.state.selected].name}
+                    fields={ [...this.state.present[this.state.selected].fields]}
+                    saveItem={this.saveItem}
+                    setToPrevious={this.setToPrevious}
+              />
+            </div>
+        );
     }
 }
 

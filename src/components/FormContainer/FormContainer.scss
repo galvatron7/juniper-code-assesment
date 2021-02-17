@@ -1,14 +1,26 @@
 /** content area */
 .form-container {
-  border-left:solid 1px #70757a;
+  border-left:solid 1px $grey-dark;
   grid-area: form-container;
   padding:50px;
-  color:#70757a;
+  color:$grey-dark;
 
   form {
     padding:20px;
     background-color:white;
-    border:solid 1px #CCCCCC;
+    border:solid 1px $grey-ligt;
+
+    .save-btn {
+      padding: 8px;
+      box-sizing: border-box;
+      background-color: $tru-red;
+      border-radius: 3px;
+      display: inline-block;
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
   }
 
   input[type=text], select {
@@ -16,12 +28,8 @@
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid $grey-ligt;
     box-sizing: border-box;
-  }
-
-  #field3 {
-    margin-left:0;
   }
 
   .cluster {

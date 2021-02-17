@@ -1,10 +1,10 @@
-import React, {useContext, useEffect} from "react";
+import React, {useEffect, forwardRef, useImperativeHandle} from "react";
 import ToggleField from "./Fields/ToggleField";
 import TextField from "./Fields/TextField";
 import OptionField from "./Fields/OptionField";
 import * as CONSTANTS from "../../Constants";
 
-const FormContainer = ({fields, name, selected, items, saveItem, setToPrevious}) =>  {
+const FormContainer = forwardRef(({fields, name, selected, items, saveItem, setToPrevious}, ref) =>  {
 
     const [currFields, setFields] = React.useState([]);
     const [fieldsToSave, setFieldsToSave] = React.useState({});
@@ -49,28 +49,44 @@ const FormContainer = ({fields, name, selected, items, saveItem, setToPrevious})
         });
     };
 
+    useImperativeHandle(ref, () => ({
+        handleCancel () {
+            const updateFields = fields.reduce((accum, field) => {
+                if(fieldsToSave[field.id]){
+                    accum.push({...field, fieldValue: fieldsToSave[field.id]})
+                } else {
+                    accum.push(field);
+                }
+                return accum;
+            },[]);
+            setFields(updateFields)
+        }
+    }));
+
     return(
         <div className="form-container">
             <form>
                 <h2>{name}</h2>
                 <div>
-                {
-                    currFields.map((field, idx) => {
-                      switch(field.fieldType) {
-                        case CONSTANTS.TEXT:
-                            return( <TextField key={idx} field={field} onBlur={onFieldAction}/> );
-                        case CONSTANTS.OPTION:
-                            return( <OptionField key={idx} field={field} onChange={onFieldAction}/> );
-                        case CONSTANTS.TOGGLE:
-                            return( <ToggleField key={idx} field={field} onChange={onFieldAction}/> );
+                    {
+                        currFields.map((field, idx) => {
+                          switch(field.fieldType) {
+                            case CONSTANTS.TEXT:
+                                return( <TextField key={idx} field={field} onBlur={onFieldAction}/> );
+                            case CONSTANTS.OPTION:
+                                return( <OptionField key={idx} field={field} onChange={onFieldAction}/> );
+                            case CONSTANTS.TOGGLE:
+                                return( <ToggleField key={idx} field={field} onChange={onFieldAction}/> );
+                        }
+                      })
                     }
-                  })
-                }
-                <button type="button" onClick={ onFieldsSave }>Save</button>
+                    <div className="save-btn">
+                        <a href="#" onClick={onFieldsSave} className="brand">{CONSTANTS.SAVE_LABEL}</a>
+                    </div>
                 </div>
             </form>
         </div>
     )
-};
+});
 
 export default FormContainer;

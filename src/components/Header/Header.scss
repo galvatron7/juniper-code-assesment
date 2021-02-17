@@ -1,9 +1,7 @@
 /** header area */
 .header {
   grid-area: header;
-  background-color: #000000;
-  border-radius-topleft: 3px;
-  border-radius-topright: 3px;
+  background-color: $tru-black;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,15 +9,11 @@
     margin-left: 15px;
     padding: 8px;
     box-sizing: border-box;
-    background-color: orange;
+    background-color: $tru-org;
     border-radius: 3px;
     a {
-      margin-left: 5px;
       text-decoration: none;
       color: white;
-    }
-    svg {
-      color:orange;
     }
   }
   .nav {
@@ -35,12 +29,11 @@
         background-color: transparent;
       }
       a.active {
-        color: red;
-        border-bottom: 2px solid red;
+        color: $tru-red;
         font-weight: 300;
       }
       a:hover {
-        color: red;
+        color: $tru-red;
       }
     }
   }

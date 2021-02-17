@@ -12,27 +12,27 @@
       font-size: 0.9em;
       list-style: none;
       box-sizing: border-box;
-      border-bottom:1px solid #70757a;
+      border-bottom:1px solid $grey-dark;
       position:relative;
       a {
         text-decoration: none;
-        color: #70757a;
+        color: $grey-dark;
         background-color: transparent;
       }
       a.active {
-        color: red;
-        border-bottom: 2px solid red;
+        color: $tru-red;
+        border-bottom: 2px solid $tru-red;
         font-weight: 300;
       }
       a:hover {
-        color: red;
+        color: $tru-red;
       }
       &.selected {
         & ::before {
           content:'';
           width: 5px;
           height:100%;
-          background-color: orange;
+          background-color: $tru-org;
           display:inline-block;
           position:absolute;
           left:0;
